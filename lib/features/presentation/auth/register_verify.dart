@@ -9,7 +9,7 @@ class RegisterVerify extends StatefulWidget{
   const RegisterVerify({super.key});
 
   @override
-  State<StatefulWidget> createState() {
+  State<RegisterVerify> createState() {
     return _RegisterVerifyState();
   }
 

@@ -6,7 +6,7 @@ class Register extends StatefulWidget{
   const Register({super.key});
 
   @override
-  State<StatefulWidget> createState() {
+  State<Register> createState() {
     return _RegisterSignInState();
   }
 
