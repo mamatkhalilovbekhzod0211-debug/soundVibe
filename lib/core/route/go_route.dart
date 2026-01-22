@@ -4,13 +4,15 @@ import 'package:saundvibe/features/presentation/auth/register.dart';
 import 'package:saundvibe/features/presentation/auth/register_verify.dart';
 import 'package:saundvibe/features/presentation/auth/sign_in.dart';
 import 'package:saundvibe/features/presentation/auth/sign_up.dart';
+import 'package:saundvibe/features/presentation/home/home_page.dart';
 
 class AppRoute {
   AppRoute._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.register_verify,
+    initialLocation: Routes.home_page,
     routes: [
+      GoRoute(path: Routes.home_page, name: 'home_page', builder: (context,state)=>const HomePage()),
       GoRoute(path: Routes.register, name: 'register', builder: (context, state) => const Register()),
       GoRoute(path: Routes.register_verify, name: 'register_verify', builder: (context, state) => const RegisterVerify()),
       GoRoute(path: Routes.singnIn, name: 'signin', builder: (context, state) => const SignIn()),
