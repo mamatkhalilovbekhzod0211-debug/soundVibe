@@ -1,67 +1,112 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class FloatingNavBar extends StatelessWidget {
-  const FloatingNavBar({super.key});
+class FloatingNavBar extends StatefulWidget {
+  FloatingNavBar({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _FloatingNavBarState();
+}
+
+class _FloatingNavBarState extends State<FloatingNavBar> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-        borderRadius: BorderRadius.circular(40),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20), // Размытие
-          child: Container(
-            height: 60,
-            width: 240,
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.35), // Полупрозрачный темный фон
-              borderRadius: BorderRadius.circular(40),
-              border: Border.all(color: Colors.grey.withOpacity(0.1)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildIcon("assets/app_images/ic_home.png"),
-                _buildIcon("assets/app_images/ic_menu.png"),
-                _buildIcon("assets/app_images/img_vibe.png"),
-                _buildIcon("assets/app_images/ic_profile.png")
-              ],
-            ),
+      borderRadius: BorderRadius.circular(40),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20), // Размытие
+        child: Container(
+          height: 80,
+          width: 240,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            color: Color(0xFF4E4C4C).withOpacity(0.2),
+            // Полупрозрачный темный фон
+            borderRadius: BorderRadius.circular(40),
+            border: Border.all(color: Colors.grey.withOpacity(0.1)),
           ),
-        ));
-  }
-
-  // Метод для обычной белой иконки
-  Widget _buildIcon(String icon) {
-    return Image.asset(icon, color: Colors.white, width: 24,height: 24,);
-  }
-
-  // Метод для иконки с градиентом (как синий домик)
-  Widget _buildGradientIcon(String icon, bool isActive) {
-    return ShaderMask(
-      shaderCallback: (bounds) => LinearGradient(
-        colors: [Colors.blueAccent, Colors.purpleAccent],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ).createShader(bounds),
-      child: Image.asset(icon, color: Colors.white, width: 30,height: 30,),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildIcon("assets/app_images/ic_home.png","assets/app_images/ic_home_selected.png", 0),
+              _buildIcon("assets/app_images/ic_menu.png","assets/app_images/ic_menu_selected.png" ,1),
+              _buildIcon("assets/app_images/img_vibe.png","assets/app_images/img_vibe.png",2),
+              _buildIcon("assets/app_images/ic_profile.png","assets/app_images/ic_profile_selected.png",3),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
-  // Метод для центральной круглой кнопки с градиентным фоном
-  Widget _buildSpecialIcon() {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          colors: [Colors.blue, Colors.purple],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+  Widget _buildIcon(String icon,String selectedIcon, int index) {
+    final bool isSelected = selectedIndex == index;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: isSelected ? Color(0xFF221C1A) : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Image.asset(
+            isSelected?selectedIcon:icon,
+            width: 24,
+            height: 24,
+          ),
         ),
       ),
-      child: Icon(Icons.auto_awesome, color: Colors.white, size: 24),
+    );
+  }
+
+  // Метод для иконки с градиентом (как синий домик)
+  Widget _buildSelectedIcon(String icon) {
+    return Image.asset(icon, color: Colors.white, width: 24, height: 24);
+  }
+}
+
+class AddButton extends StatelessWidget {
+  const AddButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(40),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20), // Размытие
+        child: Container(
+          height: 80,
+          width: 80,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
+            color: Color(0xFF4E4C4C).withOpacity(0.2),
+            // Полупрозрачный темный фон
+            borderRadius: BorderRadius.circular(40),
+            border: Border.all(color: Colors.grey.withOpacity(0.1)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: SvgPicture.asset(
+              "assets/app_images/ic_add.svg",
+              color: Colors.white,
+              width: 16,
+              height: 16,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

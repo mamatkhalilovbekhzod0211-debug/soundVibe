@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saundvibe/features/presentation/home/bottom_nav_bar.dart';
+import 'package:saundvibe/features/presentation/home/notifications.dart';
 
 const bgColor = Color(0xFF0A0A0A);
 const glassColor = Color(0x1AFFFFFF);
@@ -25,9 +26,23 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 8),
             const TopBarExact(),
             const SizedBox(height: 14),
+
            const FeedExact(),
             const Spacer(),
-            FloatingNavBar(),
+            Notifications(),
+            Padding(
+              padding: const EdgeInsets
+              .only(bottom: 8),
+              child: Row(
+                children: [
+                  Spacer(),
+                  FloatingNavBar(),
+                  Spacer(),
+                  AddButton(),
+                  Spacer()
+                ],
+              ),
+            )
           ],
         ),
       ),
