@@ -15,17 +15,17 @@ class _FloatingNavBarState extends State<FloatingNavBar> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(40),
+      borderRadius: BorderRadius.circular(35),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20), // Размытие
         child: Container(
-          height: 80,
+          height: 70,
           width: 240,
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: Color(0xFF4E4C4C).withOpacity(0.2),
             // Полупрозрачный темный фон
-            borderRadius: BorderRadius.circular(40),
+            borderRadius: BorderRadius.circular(35),
             border: Border.all(color: Colors.grey.withOpacity(0.1)),
           ),
           child: Row(
@@ -83,17 +83,17 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(40),
+      borderRadius: BorderRadius.circular(35),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20), // Размытие
         child: Container(
-          height: 80,
-          width: 80,
+          height: 70,
+          width: 70,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
             color: Color(0xFF4E4C4C).withOpacity(0.2),
             // Полупрозрачный темный фон
-            borderRadius: BorderRadius.circular(40),
+            borderRadius: BorderRadius.circular(35),
             border: Border.all(color: Colors.grey.withOpacity(0.1)),
           ),
           child: Padding(

@@ -49,69 +49,83 @@ class _NotificationsState extends State<Notifications> {
 
   Widget _buildIcon(String? icon1,String? icon2, String text) {
 
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 12,
-        right: 12
-      ),
-      child: GestureDetector(
-        onTap: () {
+    return GestureDetector(
+      onTap: () {
 
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            color:  Color(0xFF221C1A) ,
-            shape: BoxShape.circle,
-          ),
-          child: Row(
-            children: [
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: 96,
+        height: 48,
+        decoration: BoxDecoration(
+          color:  Color(0xFF221C1A) ,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Row(
+          children: [
 
-               if(icon1 != null)
-                 icon1.contains("svg")? SvgPicture.asset(
-                   icon1.toString(),
-                   width: 24,
-                   height: 24,
-                 )
-                     :
-                 Image.asset(
+             if(icon1 != null)
+               icon1.contains("svg")? Padding(
+                 padding: const EdgeInsets.only(
+                   left: 12
+                 ),
+                 child: SvgPicture.asset(
                    icon1.toString(),
                    width: 24,
                    height: 24,
                  ),
+               )
+                   :
+               Padding(
+                 padding: const EdgeInsets.only(
+                   left: 12
+                 ),
+                 child: Image.asset(
+                   icon1.toString(),
+                   width: 24,
+                   height: 24,
+                 ),
+               ),
 
-              if(icon2!=null)
-               icon2.contains("svg")? SvgPicture.asset(
+            if(icon2!=null)
+             icon2.contains("svg")? Padding(
+               padding: const EdgeInsets.only(
+                 left: 12
+               ),
+               child: SvgPicture.asset(
                  icon1.toString(),
                  width: 24,
                  height: 24,
-               )
-               :
-               Image.asset(
+               ),
+             )
+             :
+             Padding(
+               padding: const EdgeInsets.only(
+                 left: 12
+               ),
+               child: Image.asset(
                  icon2.toString(),
                  width: 24,
                  height: 24,
                ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 2
+             ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 12
+                ),
+                child: Text(
+                    text,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13
                   ),
-                  child: Text(
-                      text,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  // overflow: TextOverflow.ellipsis,
                 ),
               ),
+            ),
 
-            ],
-          ),
+          ],
         ),
       ),
     );

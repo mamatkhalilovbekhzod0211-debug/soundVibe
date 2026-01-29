@@ -4,9 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saundvibe/features/presentation/home/bottom_nav_bar.dart';
 import 'package:saundvibe/features/presentation/home/notifications.dart';
-
-const bgColor = Color(0xFF0A0A0A);
-const glassColor = Color(0x1AFFFFFF);
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,22 +25,21 @@ class _HomePageState extends State<HomePage> {
             const TopBarExact(),
             const SizedBox(height: 14),
 
-           const FeedExact(),
+            FeedExact(),
             const Spacer(),
             Notifications(),
             Padding(
-              padding: const EdgeInsets
-              .only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 children: [
                   Spacer(),
                   FloatingNavBar(),
                   Spacer(),
                   AddButton(),
-                  Spacer()
+                  Spacer(),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -196,87 +193,107 @@ class FeedExact extends StatelessWidget {
                       ),
                       Spacer(),
                       // Bottom content
-                      Positioned(
-                        left: 16,
-                        right: 16,
-                        bottom: 16,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Seller
-                            Row(
-                              children: [
-                                SellerBadge(),
-                                const Spacer(),
-                                _actionButton(
-                                  text: 'Buy',
-                                  icon: Icons.shopping_cart,
-                                  color: Colors.lightBlueAccent,
-                                ),
-                                const SizedBox(width: 10),
-                                _actionButton(
-                                  text: 'Tune',
-                                  icon: null,
-                                  color: Colors.lightBlueAccent,
-                                ),
-                                const Icon(
-                                  Icons.bookmark_border,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-
-                            const SizedBox(height: 10),
-
-                            Row(
-                              children: [
-                                const Text(
-                                  'Adidas F50 boots',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Seller
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SellerBadge(),
+                              _actionButton(
+                                text: 'Buy',
+                                icon: Icons.shopping_cart,
+                              ),
+                              _actionButton(text: 'Tune', icon: null),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(28),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 12,
+                                    sigmaY: 12,
+                                  ),
+                                  child: Container(
+                                    height: 40,
+                                    width: 65,
+                                    decoration: BoxDecoration(
+                                      color: Color(
+                                        0xFF2A2322,
+                                      ).withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(40),
+                                      border: Border.all(
+                                        color: Colors.white.withOpacity(0.3),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Icon(
+                                            Icons.bookmark_border_rounded,
+                                          color: Color(0xFFEEEEEE),
+                                        ),
+                                        SvgPicture.asset("assets/app_images/ic_saved.svg")
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Spacer(),
-                                Icon(
-                                  Icons.timer,
-                                  size: 16,
-                                  color: Colors.white70,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  '1 hours ago',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
 
-                            const SizedBox(height: 4),
+                          const SizedBox(height: 10),
 
-                            Row(
-                              children: const [
-                                Text(
-                                  '150\$',
-                                  style: TextStyle(color: Colors.white),
+                          Row(
+                            children: [
+                              const Text(
+                                'Adidas F50 boots',
+                                style: TextStyle(
+                                  color: Color(0xFFEEEEEE),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Spacer(),
-                                Text(
-                                  '...more',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 15,
-                                  ),
+                              ),
+                              Spacer(),
+                              Icon(
+                                Icons.timer,
+                                size: 16,
+                                color: Colors.white70,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                '1 hours ago',
+                                style: TextStyle(
+                                  color: Color(0xFFEEEEEE),
+                                  fontSize: 15,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
 
-                            const SizedBox(height: 14),
-                          ],
-                        ),
+                          const SizedBox(height: 4),
+
+                          Row(
+                            children: const [
+                              Text(
+                                '150\$',
+                                style: TextStyle(
+                                  color: Color(0xFFEEEEEE),
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                '...more',
+                                style: TextStyle(
+                                  color: Color(0xFFEEEEEE),
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 14),
+                        ],
                       ),
                     ],
                   ),
@@ -290,24 +307,28 @@ class FeedExact extends StatelessWidget {
             left: 16,
             right: 16,
             top: 16,
-            bottom: 80
+            bottom: 80,
           ),
           child: Row(
             children: [
-              _itemMenu(imgName: "assets/app_images/img_vibe.png", text: "Vibe"),
+              _itemMenu(
+                imgName: "assets/app_images/img_vibe.png",
+                text: "Vibe",
+              ),
 
               Spacer(),
-              _itemMenu(imgName: "assets/app_images/img_soft.png", text: "Soft"),
-
-              SizedBox(
-                width: 8,
+              _itemMenu(
+                imgName: "assets/app_images/img_soft.png",
+                text: "Soft",
               ),
-              _itemMenu(imgName: "assets/app_images/img_comment.png", text: null),
-              SizedBox(
-                width: 8,
-              ),
-              _itemMenu(imgName: "assets/app_images/img_share.png", text: null)
 
+              SizedBox(width: 8),
+              _itemMenu(
+                imgName: "assets/app_images/img_comment.png",
+                text: null,
+              ),
+              SizedBox(width: 8),
+              _itemMenu(imgName: "assets/app_images/img_share.png", text: null),
             ],
           ),
         ),
@@ -325,7 +346,10 @@ class FeedExact extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(1),
-            border: Border.all(color: Colors.white..withOpacity(0.35),width: 0.05),
+            border: Border.all(
+              color: Colors.white..withOpacity(0.35),
+              width: 0.05,
+            ),
             borderRadius: BorderRadius.circular(30),
           ),
           // margin: EdgeInsets.only(left: 16, top: 16),
@@ -344,32 +368,42 @@ class FeedExact extends StatelessWidget {
     );
   }
 
-  static Widget _actionButton({
-    required String text,
-    required IconData? icon,
-    required Color color,
-  }) {
-    return Expanded(
-      child: Container(
-        height: 44,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null) Icon(icon, color: Colors.white, size: 18),
-            const SizedBox(width: 6),
-            Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+  static Widget _actionButton({required String text, required IconData? icon}) {
+    return Container(
+      height: 34,
+      width: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(17),
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFF034EFE),
+            Color(0xFF0BA4FE), // синий
+            Color(0xFFA332FE), // фиолетовый
           ],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          if (icon != null) Icon(icon, color: Colors.white, size: 22),
+        ],
       ),
     );
   }
@@ -386,9 +420,8 @@ class SellerBadge extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: Container(
           height: 56,
-          padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.25),
+            color: Color(0xFF8F8789).withOpacity(0.5),
             borderRadius: BorderRadius.circular(40),
             border: Border.all(color: Colors.white.withOpacity(0.3)),
           ),
@@ -420,20 +453,30 @@ class SellerBadge extends StatelessWidget {
               // Text
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: const [
-                  Text(
-                    'eShoper',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: 12
+                    ),
+                    child: Text(
+                      'eShoper',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   SizedBox(height: 2),
-                  Text(
-                    '@eshoper',
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: 12
+                    ),
+                    child: Text(
+                      '@eshoper',
+                      style: TextStyle(color: Colors.white70, fontSize: 10),
+                    ),
                   ),
                 ],
               ),
@@ -444,4 +487,3 @@ class SellerBadge extends StatelessWidget {
     );
   }
 }
-
